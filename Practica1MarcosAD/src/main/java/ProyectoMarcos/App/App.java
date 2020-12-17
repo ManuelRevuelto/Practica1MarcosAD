@@ -25,6 +25,12 @@ public class App {
 			case 3:
 				Funciones.mostrarTodosLosCliente(c);
 				break;
+			case 4:
+				Funciones.buscarCliente(c);
+				break;
+			case 5:
+				Funciones.editarUnProducto(c);
+				break;
 			case 6:
 				exit = false;
 				break;

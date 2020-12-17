@@ -19,6 +19,8 @@ public class Funciones {
 		System.out.println("1.- Añade un cliente");
 		System.out.println("2.- Mostrar un cliente");
 		System.out.println("3.- Mostrar todos los clientes");
+		System.out.println("4.- Buscar cliente");
+		System.out.println("5.- Editar producto");
 		System.out.println("6.- EXIT");
 		System.out.print("Opcion: ");
 	}
@@ -93,7 +95,8 @@ public class Funciones {
 	}
 
 	/**
-	 * Esta funcion sirve para mostrar el cliente que el usuario desee por pantalla
+	 * Esta funcion sirve para mostrar el cliente de la base de datos que el usuario
+	 * desee por pantalla
 	 * 
 	 * @param c
 	 */
@@ -102,6 +105,9 @@ public class Funciones {
 		Statement st = null;
 		ResultSet rs = null;
 		try {
+			System.out.println();
+			System.out.println("\t************* MOSTRAR CLIENTE POR ID *************");
+			System.out.println();
 			System.out.print("Introduzca el id del cliente que quiere que se muestre por pantalla: ");
 			int id = kb.nextInt();
 			String sql = "SELECT * FROM jardineria.cliente WHERE codigo_cliente = " + id + ";";
@@ -117,23 +123,26 @@ public class Funciones {
 				System.out.println();
 			}
 		} catch (Exception e) {
-			System.out.println("Codigo del cliente erroneo");
+			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Esta funcion sirve para mostrar todos los clientes por pantalla
+	 * Esta funcion sirve para mostrar todos los clientes de la base de datos por
+	 * pantalla
 	 * 
 	 * @param c
 	 */
 	public static void mostrarTodosLosCliente(Connection c) {
+		System.out.println();
+		System.out.println("\t************* MOSTRAR TODOS LOS CLIENTES *************");
+		System.out.println();
 		String sql = "SELECT * FROM jardineria.cliente ORDER BY nombre_cliente ;";
 		Statement st = null;
 		ResultSet rs = null;
 		try {
 			st = c.createStatement();
 			rs = st.executeQuery(sql);
-			System.out.println();
 			while (rs.next()) {
 				System.out.println("Cliente = [ " + rs.getString(1) + "  |  " + rs.getString(2) + "  |  "
 						+ rs.getString(3) + "  |  " + rs.getString(4) + "  |  " + rs.getString(5) + "  |  "
@@ -146,4 +155,45 @@ public class Funciones {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Esta funcion sirve para buscar un cliente en la base de datos por su nombre
+	 * 
+	 * @param c
+	 */
+	public static void buscarCliente(Connection c) {
+		System.out.println();
+		System.out.println("\t************* BUSCAR CLIENTE POR NOMBRE *************");
+		System.out.println();
+		System.out.print("Introduzca el nombre o el apellido del cliente que desea que se muestre por pantalla: ");
+		String nombre;
+		nombre = kb.nextLine();
+		String sql = "SELECT * FROM jardineria.cliente WHERE nombre_cliente = '" + nombre + "' OR nombre_contacto = '"
+				+ nombre + "' OR apellido_contacto = '" + nombre + "';";
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+
+			st = c.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				System.out.println();
+				System.out.println("Cliente = [ " + rs.getString(1) + "  |  " + rs.getString(2) + "  |  "
+						+ rs.getString(3) + "  |  " + rs.getString(4) + "  |  " + rs.getString(5) + "  |  "
+						+ rs.getString(6) + "  |  " + rs.getString(7) + "  |  " + rs.getString(8) + "  |  "
+						+ rs.getString(9) + "  |  " + rs.getString(10) + "  |  " + rs.getString(11) + "  |  "
+						+ rs.getString(12) + "  |  " + rs.getString(13) + "  |  " + rs.getString(14) + " ]");
+				System.out.println();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void editarUnProducto(Connection c) {
+		System.out.println();
+		System.out.println("\t************* EDITAR UN PRODUCTO *************");
+		System.out.println();
+	}
+
 }
