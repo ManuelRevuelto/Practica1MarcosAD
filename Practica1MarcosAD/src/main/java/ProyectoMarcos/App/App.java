@@ -38,5 +38,6 @@ public class App {
 				throw new IllegalArgumentException("Valor erroneo: " + op);
 			}
 		} while (exit);
+		c.close();
 	}
 }
